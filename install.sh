@@ -11,8 +11,8 @@ fi
 
 # make symbric link
 function make_symlink() {
-  for file in ~/.dotfiles/conf/.* ; do
-    if [ -f $file ] && [ ! -e $file ]; then
+  for file in ~/.dotfiles/conf/* ; do
+    if [ -f $file ]; then
       ln -s $file ~/.${file##*/}
     fi
   done
