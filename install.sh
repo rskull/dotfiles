@@ -5,14 +5,14 @@ echo "Installing..."
 # download dotfiles
 git clone https://github.com/rskull/dotfiles > /dev/null 2>&1
 
-if [ ! -e dotfiles ]; then
+if [ ! -e .dotfiles ]; then
   mv dotfiles .dotfiles
 fi
 
 # make symbric link
 function make_symlink() {
   for file in ~/.dotfiles/conf/* ; do
-    if [ -f $file ]; then
+    if [ -f $file ] && [ ! -e .$file ]; then
       ln -s $file ~/.${file##*/}
     fi
   done
@@ -20,6 +20,7 @@ function make_symlink() {
 
 # vim
 ln -s ~/.dotfiles/vim .vim
+mkdir ~/.vim/backup ~/.vim/dict
 
 # NeoBundle
 curl -sS https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh | sh > /dev/null 2>&1
@@ -29,7 +30,6 @@ DICT_DIR=~/.vim/dict
 DICT_PHP=php.dict
  
 if [ ! -e $DICT_DIR/$DICT_PHP ]; then
-  mkdir -p $DICT_DIR
   php -r '$f=get_defined_functions();echo join("\n",$f["internal"]);' | sort > $DICT_DIR/$DICT_PHP | echo > /dev/null 2>&1
 fi
 
