@@ -1,0 +1,28 @@
+#shell /bin/sh
+
+defutf8 on
+
+startup_message off
+vbell off
+autodetach on
+altscreen on
+defbce on
+
+term xterm-256color
+termcapinfo xterm* ti@:te@
+
+# Resize window
+bind e eval 'command -c resize' 'echo "Resize window"'
+bind ^e eval 'command -c resize' 'echo "Resize window"'
+bind -c resize h eval 'command -c resize' 'resize -h -1'
+bind -c resize l eval 'command -c resize' 'resize -h +1'
+bind -c resize j eval 'command -c resize' 'resize -v +1'
+bind -c resize k eval 'command -c resize' 'resize -v -1'
+bind -c resize ^h eval 'command -c resize' 'resize -h -1'
+bind -c resize ^l eval 'command -c resize' 'resize -h +1'
+bind -c resize ^j eval 'command -c resize' 'resize -v +1'
+bind -c resize ^k eval 'command -c resize' 'resize -v -1'
+
+hardstatus alwayslastline
+hardstatus string "%{= kG}%{g}[ %{B}$LOGNAME@%H%{g} ] [%= %{= kw}%?%-Lw%?%{B}<< %n*%f%t%?(%u)%? >>%{w}%?%+Lw%?%?%= %{g}] [ %{B}%Y/%m/%d(%D)%c:%s%{g} ]"
+hardstatus off

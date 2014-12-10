@@ -1,0 +1,190 @@
+" ------------------------------------------------------------------------------------
+" Common
+" ------------------------------------------------------------------------------------
+" {{{1
+ 
+set encoding=utf-8
+set fileencodings=utf-8,cp932,ucs-bom,iso-2022-jp,euc-jp
+
+" タブ、改行などの表示
+highlight NonText guifg=lightgray ctermfg=lightgray
+highlight SpecialKey guifg=lightgray ctermfg=lightgray
+" set list
+" set listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
+
+" ファイル形式別プラグイン
+filetype plugin on
+
+" モードラインを有効にする
+set modeline
+
+" 3行目までをモードラインとして検索する
+set modelines=3
+
+" Back up setting
+set backupdir=~/.vim/backup
+set directory=~/.vim/backup
+
+" シンタックスハイライト
+syntax on
+
+" インサートモードでバックスペース
+set backspace=indent,eol,start
+
+" インデント設定
+set autoindent
+set smartindent
+set expandtab
+set tabstop=4 shiftwidth=4 softtabstop=4
+
+" 大小文字を区別しない検索
+set ignorecase
+
+" ステータスラインを表示する
+set laststatus=2
+
+" 行番号を表示する
+set number
+
+" コマンドをステータスラインに表示
+set showcmd
+
+" 補完候補を表示する
+set wildmenu
+
+" 折り返さない
+set nowrap
+
+" インデントの時範囲選択を開放しない
+vnoremap > >gv
+vnoremap < <gv
+
+" ステータスライン
+highlight StatusLine term=reverse cterm=reverse
+augroup EventHook
+    autocmd!
+    autocmd InsertLeave * call s:changeFace('ｳﾜｧｧｧｧｧｧヽ(`Д´)ﾉｧｧｧｧｧｧﾝ!')
+    autocmd CursorMoved * call s:changeFace('(((っ･ω･)っﾌﾞｰﾝ)))')
+    autocmd InsertEnter * call s:changeFace('щ(ﾟдﾟщ)ｶﾓｰﾝ')
+    autocmd BufWritePost * call s:changeFace('☆（ゝω・）vｷｬﾋﾟ')
+    autocmd CursorHold * call s:changeFace('(´・∀・`)')
+augroup END
+let s:oldFace = ""
+function! s:changeFace(face)
+    if a:face == s:oldFace
+        return
+    endif
+    silent let l:line = 'set statusline=\ ' . a:face
+    silent let l:line .= '\ %<%l,%c=%B%=%n:%p%%\ %m%r%h%w%y\ %t\ [%{&fenc}][%{&ff}]\ '
+    silent exec l:line
+    silent let s:oldFace = a:face
+endfunction
+
+let g:netrw_liststyle = 3
+let g:netrw_altv = 1
+let g:netrw_alto = 1
+
+" モード切替
+imap <C-j> <C-[>
+
+" プラグイン {{{1
+
+" ------------------------------------------------------------------------------------
+" NeoBundle
+" ------------------------------------------------------------------------------------
+" {{{2
+
+if has('vim_starting')
+  set nocompatible               " Be iMproved
+
+  " Required:
+  set runtimepath+=~/.vim/bundle/neobundle.vim/
+endif
+
+" Required:
+call neobundle#begin(expand('~/.vim/bundle'))
+
+" Let NeoBundle manage NeoBundle
+" Required:
+NeoBundleFetch 'Shougo/neobundle.vim'
+
+" Add or remove your Bundles here:
+NeoBundle 'Shougo/neosnippet.vim'
+NeoBundle 'Shougo/neosnippet-snippets'
+NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'kien/ctrlp.vim'
+NeoBundle 'flazz/vim-colorschemes'
+NeoBundle 'Shougo/neocomplcache'
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'thinca/vim-visualstar'
+NeoBundle 'airblade/vim-gitgutter'
+NeoBundle 'gitv'
+NeoBundle 'mattn/emmet-vim'
+NeoBundle 'groenewege/vim-less'
+NeoBundle 'osyo-manga/vim-over'
+
+" You can specify revision/branch/tag.
+NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
+
+" Required:
+call neobundle#end()
+
+" Required:
+filetype plugin indent on
+
+" If there are uninstalled bundles found on startup,
+" this will conveniently prompt you to install them.
+NeoBundleCheck
+
+" カラースキーム
+colorscheme molokai
+
+" NEDRTree
+
+let file_name = expand("%")
+if has('vim_starting') &&  file_name == ""
+    autocmd VimEnter * NERDTree ./
+endif
+
+nmap <silent> <C-n>     :NERDTreeToggle<CR>
+
+" ハイライト設定
+
+set hlsearch
+nmap <Esc><Esc> :nohlsearch<CR><Esc>
+
+" YankRing
+
+nmap ,y :YRShow<CR>
+set clipboard+=unnamedplus,unnamed
+
+" NeoComplache
+
+autocmd BufRead *.php\|*.ctp\|*.tpl\|*.inc :set dictionary=~/.vim/dict/php.dict filetype=php
+let g:neocomplcache_enable_at_startup = 1
+let g:neocomplcache_enable_camel_case_completion = 1
+let g:neocomplcache_enable_underbar_completion = 1
+let g:neocomplcache_smart_case = 1
+let g:neocomplcache_min_syntax_length = 3
+let g:neocomplcache_manual_completion_start_length = 0
+let g:neocomplcache_caching_percent_in_statusline = 1
+let g:neocomplcache_enable_skip_completion = 1
+let g:neocomplcache_skip_input_time = '0.5'
+
+" OverCommandLine
+nnoremap <silent> <Leader>m :OverCommandLine<CR>%s/
+
+" vim scp plugin
+
+" let g:vim_scp_configs = {
+" \    'ProjectName' : {
+" \        'local_base_path'  : '',
+" \        'remote_base_path' : '',
+" \        'user' : '',
+" \        'pass' : '',
+" \        'host' : '',
+" \        'port' : ''
+" \    }
+" \}
+

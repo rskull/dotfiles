@@ -1,0 +1,10 @@
+[user]
+	name = rskull
+	email = info@rskull.com
+[color]
+	ui = true
+[alias]
+	co = checkout
+	st = status
+	br = branch
+	ci = commit
