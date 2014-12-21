@@ -1,3 +1,8 @@
+# Functions
+if [ -f $HOME/.dotfiles/conf/functions ]; then
+    source $HOME/.dotfiles/conf/functions
+fi
+
 # 補完機能
 autoload -Uz compinit
 compinit
@@ -31,13 +36,13 @@ function updateMessage() {
 }
 
 add-zsh-hook precmd updateMessage
-PS1="%{$fg[cyan]%}
-> %~%1v
-rskull@mac${WINDOW:+"[$WINDOW]"}\$ %{${reset_color}%}"
+
+PROMPT="%{${fg[green]}%}[%n@%m]%{${reset_color}%} %~
+\$ "
 
 # エイリアスの設定
-alias ls='ls -GF'
-alias ll='ls -la'
+alias ls='ls -F --color=auto'
+alias ll='ls -la -F --color=auto'
 alias screen='screen -U'
 alias c='clear'
 alias h='history'
