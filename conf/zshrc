@@ -37,7 +37,7 @@ function updateMessage() {
 
 add-zsh-hook precmd updateMessage
 
-PROMPT="%{${fg[green]}%}[%n@%m]%{${reset_color}%} %~
+PROMPT="%{${fg[cyan]}%}[%n@%m]%{${reset_color}%} %~
 \$ "
 
 # エイリアスの設定
