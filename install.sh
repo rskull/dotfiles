@@ -18,6 +18,10 @@ function make_symlink() {
   done
 }
 
+# tmux
+mkdir .tmux
+git clone https://github.com/erikw/tmux-powerline.git .tmux/tmux-powerline > /dev/null 2>&1
+
 # vim
 ln -s ~/.dotfiles/vim .vim
 mkdir ~/.vim/backup ~/.vim/dict
