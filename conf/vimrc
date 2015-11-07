@@ -22,8 +22,8 @@ set modeline
 set modelines=3
 
 " Back up setting
-set backupdir=~/.vim/backup
-set directory=~/.vim/backup
+set backupdir=~/.dotfiles/vim/backup
+set directory=~/.dotfiles/vim/backup
 
 " シンタックスハイライト
 syntax on
