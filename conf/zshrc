@@ -43,8 +43,8 @@ PROMPT="%{${fg[cyan]}%}[%n@%m]%{${reset_color}%} %~
 export LSCOLORS=cxfxcxdxbxegedabagacad
 
 # エイリアスの設定
-alias ls='ls -F --color=auto'
-alias ll='ls -la -F --color=auto'
+alias ls='ls -G'
+alias ll='ls -la -G'
 alias screen='screen -U'
 alias c='clear'
 alias h='history'
