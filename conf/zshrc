@@ -35,6 +35,8 @@ PS1="%{$fg[cyan]%}
 > %~%1v
 rskull@mac${WINDOW:+"[$WINDOW]"}\$ %{${reset_color}%}"
 
+export LSCOLORS=cxfxcxdxbxegedabagacad
+
 # エイリアスの設定
 alias ls='ls -GF'
 alias ll='ls -la'
@@ -70,3 +72,12 @@ setopt extendedglob     # 拡張グロブ
 
 export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 
+# scala
+export PATH=$PATH:/usr/local/src/scala/bin
+export SCALA_HOME=/usr/local/src/scala
+
+# activator
+export PATH=$PATH:/usr/local/src/activator
+
+# packer
+export PATH=/usr/local/packer:$PATH
