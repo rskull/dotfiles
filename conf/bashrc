@@ -7,6 +7,11 @@ if [ -f /etc/bashrc ]; then
     . /etc/bashrc
 fi
 
+# Functions
+if [ -f $HOME/.dotfiles/conf/functions ]; then
+    source $HOME/.dotfiles/conf/functions
+fi
+
 # -----------------------------------------------------------------------------------------------------------------------
 # Alias
 # -----------------------------------------------------------------------------------------------------------------------
@@ -17,17 +22,4 @@ alias la='ls -A'
 alias l='ls -CF'
 alias e='exit'
 alias c='clear'
-
-# -----------------------------------------------------------------------------------------------------------------------
-# Functions
-# -----------------------------------------------------------------------------------------------------------------------
-
-git-prune-branches-dry-run() {
-    git fetch --dry-run --prune origin
-    git fetch origin && git branch --merged origin/master | grep -vE ' master$|^\*' | xargs echo git branch -d
-}
-
-git-prune-branches () {
-    git fetch --prune origin && git branch --merged origin/master | grep -vE ' master$|^\*' | xargs git branch -d
-}
 
