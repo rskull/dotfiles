@@ -8,3 +8,22 @@
 	st = status
 	br = branch
 	ci = commit
+	wt = worktree
+	l = log --oneline --graph --all --decorate
+[core]
+	excludesfile = /Users/rskull/.gitignore_global
+	editor = vim
+[merge]
+	tool = vimdiff2
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[ghq]
+	root = /Users/rskull/work/go/src

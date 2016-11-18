@@ -3,6 +3,11 @@ if [ -f $HOME/.dotfiles/conf/functions ]; then
     source $HOME/.dotfiles/conf/functions
 fi
 
+# profile
+if [ -f /etc/profile ]; then
+    source /etc/profile
+fi
+
 # 補完機能
 autoload -Uz compinit
 compinit
@@ -37,7 +42,9 @@ function updateMessage() {
 
 add-zsh-hook precmd updateMessage
 
-PROMPT="%{${fg[cyan]}%}[%n@%m]%{${reset_color}%} %~
+#PROMPT="%{${fg[cyan]}%}[%n@%m]%{${reset_color}%} %~
+#\$ "
+PROMPT="%{${fg[cyan]}%}[DotEarl@%m]%{${reset_color}%} %~
 \$ "
 
 export LSCOLORS=cxfxcxdxbxegedabagacad
@@ -51,6 +58,8 @@ alias h='history'
 alias e='exit'
 alias pressjs='uglifyjs'
 alias rmdss='find . -name .DS_Store -print0 | xargs -0 rm'
+alias vim='nvim'
+alias vi='nvim'
 
 alias cot='open -g -a CotEditor'    # ターミナルからCotEditorを開く
 alias safari='open -g -a safari'    # ターミナルからSafariを開く
@@ -86,3 +95,15 @@ export PATH=$PATH:/usr/local/src/activator
 
 # packer
 export PATH=/usr/local/packer:$PATH
+
+# composer
+export PATH=$PATH:$HOME/.composer/vendor/bin
+
+# rbenv
+rbenv global 2.2.3
+
+# iTerm
+test -e ${HOME}/.iterm2_shell_integration.zsh && source ${HOME}/.iterm2_shell_integration.zsh
+
+# tmux
+PROMPT+=`$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")`

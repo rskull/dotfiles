@@ -4,8 +4,7 @@
 " {{{1
  
 set encoding=utf-8
-set fileencodings=utf-8,cp932,ucs-bom,iso-2022-jp,euc-jp
-
+set fileencodings=utf-8,cp932,ucs-bom,iso-2022-jp,euc-jp 
 " タブ、改行などの表示
 highlight NonText guifg=lightgray ctermfg=lightgray
 highlight SpecialKey guifg=lightgray ctermfg=lightgray
@@ -24,6 +23,8 @@ set modelines=3
 " Back up setting
 " set backupdir=~/.dotfiles/vim/backup
 " set directory=~/.dotfiles/vim/backup
+
+let mapleader = "\<Space>"
 
 " シンタックスハイライト
 syntax on
@@ -54,6 +55,9 @@ set wildmenu
 
 " 折り返さない
 set nowrap
+
+" 行のハイライト
+set cursorline
 
 " インデントの時範囲選択を開放しない
 vnoremap > >gv
@@ -99,10 +103,10 @@ if &compatible
 endif
 
 " Required:
-set runtimepath^=.vim/dein/repos/github.com/Shougo/dein.vim
+set runtimepath^=$HOME/.dotfiles/vim/dein/repos/github.com/Shougo/dein.vim
 
 " Required:
-call dein#begin(expand('.vim/dein'))
+call dein#begin(expand('~/.vim/dein'))
 
 " Let dein manage dein
 " Required:
@@ -117,13 +121,21 @@ call dein#add('tpope/vim-fugitive')
 call dein#add('kien/ctrlp.vim')
 call dein#add('flazz/vim-colorschemes')
 call dein#add('scrooloose/nerdtree')
+call dein#add('Xuyuanp/nerdtree-git-plugin')
 call dein#add('rking/ag.vim')
 call dein#add('thinca/vim-visualstar')
 call dein#add('airblade/vim-gitgutter')
 call dein#add('mattn/emmet-vim')
 call dein#add('groenewege/vim-less')
 call dein#add('osyo-manga/vim-over')
+call dein#add('fatih/vim-go')
 call dein#add('gitv')
+call dein#add('TwitVim')
+call dein#add('easymotion/vim-easymotion')
+call dein#add('editorconfig/editorconfig-vim')
+call dein#add('jacoborus/tender')
+call dein#add('scrooloose/syntastic')
+call dein#add('rskull/syntastic-local-eslint.vim')
 
 " You can specify revision/branch/tag.
 call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
@@ -140,7 +152,7 @@ if dein#check_install()
 endif
 
 " カラースキーム
-colorscheme molokai
+colorscheme tender
 
 " NEDRTree
 
@@ -150,6 +162,18 @@ if has('vim_starting') &&  file_name == ""
 endif
 
 nmap <silent> <C-n> :NERDTreeToggle<CR>
+
+let g:NERDTreeIndicatorMapCustom = {
+    \ "Modified"  : "✹",
+    \ "Staged"    : "✚",
+    \ "Untracked" : "✭",
+    \ "Renamed"   : "➜",
+    \ "Unmerged"  : "═",
+    \ "Deleted"   : "✖",
+    \ "Dirty"     : "✗",
+    \ "Clean"     : "✔︎",
+    \ "Unknown"   : "?"
+    \ }
 
 " ハイライト設定
 
@@ -180,3 +204,36 @@ let g:neocomplcache_skip_input_time = '0.5'
 
 " OverCommandLine
 nnoremap <silent> <Leader>m :OverCommandLine<CR>%s/
+
+" Twitter
+let twitvim_force_ssl = 1 
+let twitvim_count = 40
+
+" Vim-easymotion
+map <Leader>l <Plug>(easymotion-lineforward)
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+map <Leader>h <Plug>(easymotion-linebackward)
+let g:EasyMotion_startofline = 0 " keep cursor column when JK motion
+let g:EasyMotion_do_mapping = 0 " Disable default mappings
+nmap s <Plug>(easymotion-overwin-f)
+let g:EasyMotion_smartcase = 1
+
+" eslint
+let g:syntastic_javascript_checkers=['eslint']
+
+" エラー行に sign を表示
+let g:syntastic_enable_signs = 1
+" location list を常に更新
+let g:syntastic_always_populate_loc_list = 0
+" location list を常に表示
+let g:syntastic_auto_loc_list = 0
+" ファイルを開いた時にチェックを実行する
+let g:syntastic_check_on_open = 0
+" :wq で終了する時もチェックする
+let g:syntastic_check_on_wq = 0
+
+" golnag
+set rtp+=$GOROOT/misc/vim
+exe "set rtp+=".globpath($GOPATH, "src/github.com/nsf/gocode/vim")
+set completeopt=menu,preview
