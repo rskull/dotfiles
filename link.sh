@@ -1,4 +1,3 @@
-
 #!/bin/bash
 
 # make symbric link
