@@ -42,28 +42,23 @@ function updateMessage() {
 
 add-zsh-hook precmd updateMessage
 
-#PROMPT="%{${fg[cyan]}%}[%n@%m]%{${reset_color}%} %~
-#\$ "
-PROMPT="%{${fg[cyan]}%}[DotEarl@%m]%{${reset_color}%} %~
-\$ "
+PROMPT="%F{74}%m@%{${reset_color}%} %F{75}%~%f
+%(?.%F{161}.%F{197})❯%f "
 
 export LSCOLORS=cxfxcxdxbxegedabagacad
 
 # エイリアスの設定
 alias ls='ls -G'
 alias ll='ls -la -G'
-alias screen='screen -U'
 alias c='clear'
 alias h='history'
 alias e='exit'
-alias pressjs='uglifyjs'
 alias rmdss='find . -name .DS_Store -print0 | xargs -0 rm'
-alias vim='nvim'
-alias vi='nvim'
 
 alias cot='open -g -a CotEditor'    # ターミナルからCotEditorを開く
 alias safari='open -g -a safari'    # ターミナルからSafariを開く
 alias console='open -a console'     # ターミナルからコンソールを開く
+alias vsc='open -a /Applications/Visual\ Studio\ Code.app'
 
 export WORDCHARS='*?_.[]~=&;!#$%^(){}<>' # 区切り文字
 
@@ -86,24 +81,37 @@ setopt extendedglob     # 拡張グロブ
 
 export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 
-# scala
-export PATH=$PATH:/usr/local/src/scala/bin
-export SCALA_HOME=/usr/local/src/scala
-
-# activator
-export PATH=$PATH:/usr/local/src/activator
-
-# packer
-export PATH=/usr/local/packer:$PATH
-
 # composer
-export PATH=$PATH:$HOME/.composer/vendor/bin
+#export PATH=$PATH:$HOME/.composer/vendor/bin
 
 # rbenv
-rbenv global 2.2.3
-
-# iTerm
-test -e ${HOME}/.iterm2_shell_integration.zsh && source ${HOME}/.iterm2_shell_integration.zsh
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+rbenv global 2.4.1
 
 # tmux
 PROMPT+=`$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")`
+
+# nodebrew
+export PATH=$HOME/.nodebrew/current/bin:$PATH
+
+# Android
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export PATH=$ANDROID_HOME/platform-tools:$PATH
+export PATH=$ANDROID_HOME/tools:$PATH
+export PATH=$ANDROID_HOME/tools/bin:$PATH
+
+# Golang
+export GOPATH=$HOME/work/go
+export GOROOT=/usr/local/go
+export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+
+# php71
+export PATH="/usr/local/opt/php@7.1/bin:$PATH"
+export PATH="/usr/local/opt/php@7.1/sbin:$PATH"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/dotearl/Downloads/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/dotearl/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/dotearl/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/dotearl/Downloads/google-cloud-sdk/completion.zsh.inc'; fi

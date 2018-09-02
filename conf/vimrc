@@ -20,6 +20,9 @@ set modeline
 " 3行目までをモードラインとして検索する
 set modelines=3
 
+" マウスモード
+set mouse=a
+
 " Back up setting
 " set backupdir=~/.dotfiles/vim/backup
 " set directory=~/.dotfiles/vim/backup
@@ -129,13 +132,14 @@ call dein#add('mattn/emmet-vim')
 call dein#add('groenewege/vim-less')
 call dein#add('osyo-manga/vim-over')
 call dein#add('fatih/vim-go')
-call dein#add('gitv')
-call dein#add('TwitVim')
+"call dein#add('gitv')
+"call dein#add('TwitVim')
 call dein#add('easymotion/vim-easymotion')
 call dein#add('editorconfig/editorconfig-vim')
 call dein#add('jacoborus/tender')
 call dein#add('scrooloose/syntastic')
 call dein#add('rskull/syntastic-local-eslint.vim')
+call dein#add('rust-lang/rust.vim')
 
 " You can specify revision/branch/tag.
 call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
